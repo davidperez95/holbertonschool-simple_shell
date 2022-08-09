@@ -1,6 +1,12 @@
 #include <string.h>
 #include <stdio.h>
 
+/**
+ *main
+ *
+ *
+ */
+
 int main()
 {
 	char text[] = "Hola:Mundo:que:mas:pues";

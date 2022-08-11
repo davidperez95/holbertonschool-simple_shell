@@ -1,17 +1,27 @@
+#include <stdio.h>
 #include <string.h>
+#include "main.h"
 
 extern char **environ;
 
-int main(int ac, char **av, char **env)
+int **find_path(char **environ)
 {
-	unsigned int i;
+	unsigned int i = 0;
+	char *str_path = "PATH=";
+	char *my_path = NULL;
+	char **envp = NULL;
 
-	for (i = 0; environ[i] != '\0' | env[i] != '\0'; i++)
+	while (environ[i] != NULL)
 	{
-		printf("%s\n", env[i]);
-		printf("%d\n", env[i]);
-		printf("%s\n", environ[i]);
-		printf("%d\n", environ[i]);
+		if (strncmp(environ[i], str_path, 5) == 0)
+		{
+			my_path = environ[i];
+			break;
+		}
+		i++;
 	}
-	return (0);
+
+	envp = tokenizer(my_path);
+
+	return (env);
 }

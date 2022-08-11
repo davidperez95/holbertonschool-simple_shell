@@ -1,19 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <sys/types.h>
-
-#define TRUE 1
-
-int _strlen(char *string)
-{
-	int len = 0;
-
-	while (string[len])
-		len++;
-	return (len);
-}
+#include "main.h"
 
 int prompt(void)
 {
@@ -25,6 +10,7 @@ int prompt(void)
 int main(void)
 {
 	char *line = NULL;
+	char *delim = " ";
 	size_t line_size = 0;
 	int status;
 	int characters_read = 0;

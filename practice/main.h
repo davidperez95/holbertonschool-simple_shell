@@ -12,6 +12,10 @@
 
 /* Prototypes */
 
+char **tokenizer(char *line);
+int _strlen(char *string);
+int prompt(void);
+
 /* Macros */
 
 #define TRUE 1

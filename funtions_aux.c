@@ -7,24 +7,9 @@ extern char **environ;
  *
  *
  */
-int _strlen(char *string)
+char **tokenizer(char *line, char *delim)
 {
-	int len = 0;
-
-	while (string[len])
-		len++;
-
-	return (len);
-}
-
-/**
- *
- *
- *
- */
-char **tokenizer(char *line)
-{
-	char *delim = " \n\t", *token = NULL, *copy_line = NULL;
+	char *token = NULL, *copy_line = NULL;
 	char **argv = NULL;
 	int count_token = 0, i = 0;
 
@@ -83,7 +68,7 @@ char **find_path(char **environ)
 		i++;
 	}
 
-	envp = tokenizer(my_path);
+	envp = tokenizer(my_path, DELIM_PATH);
 
 	return (envp);
 }

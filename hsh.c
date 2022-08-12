@@ -11,50 +11,43 @@ int prompt(void)
 
 int main(void)
 {
-	char *line = NULL;
-	char *delim = " ";
+	char *line = NULL, **argv = NULL, **envp = NULL;
 	size_t line_size = 0;
-	int status;
-	int characters_read = 0;
+	int status, characters_read = 0;
 	pid_t child_pid;
-	char **argv = NULL;
-	char **envp = NULL;
 
 	while (TRUE)
 	{
-		/* chequeamos si es interactivo */
 		if (isatty(TRUE))
-		/* si es interactivo llamamos a la función prompt */
 			prompt();
 		if (!isatty(TRUE))
 			break;
-		/* leemos los caracteres de entrada */
 		characters_read = getline(&line, &line_size, stdin);
-		/* asignamos el comando a la posición 0 de argv */
-		argv = tokenizer(line);
+		argv = tokenizer(line, DELIM_LINE);
+		if (argv[0] == NULL)
+			continue;
 		envp = find_path(environ);
-		/* creamos el proceso hijo */
+		if (strcmp(argv[0], "exit") == 0)
+		{
+			free(line), free(argv), free(envp);
+			exit(1);
+		}
 		child_pid = fork();
 		if (child_pid == -1)
+		{
+			free(line), free(argv), free(envp);
 			return (EXIT_FAILURE);
+		}
 		if (child_pid == 0)
 		{
-			/* si el proceso hijo se crea, se ejecuta el comando pasado a argv[0] */
-			/* IMPORTANTE */
-			/* en el espacio de NULL hay que poner el camino del PATH para que se
-			 * encuentre el comando, usando extenr char **environ */
 			if (execve(argv[0], argv, envp) == -1)
 			       perror("error");
 		}
 		else
 		{
-			/* el proceso padre espera */
 			wait(&status);
 		}
-		/* liberamos la linea creada con getline */	
-		free(line);
-		free(argv);
-		free(envp);
+		free(line), free(argv), free(envp);
 	}
 	return (EXIT_SUCCESS);
 }

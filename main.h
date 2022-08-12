@@ -12,16 +12,19 @@
 
 /* Prototypes */
 
-char **tokenizer(char *line);
+char **tokenizer(char *line, char *delim);
 char **find_path(char **environ);
 int _strlen(char *string);
+int _strcmp(char *s1, char *s2);
+char *_strcpy(char *dest, char *src);
+int _strncmp(char *s1, char *s2, size_t n);
 int prompt(void);
 
 /* Macros */
 
 #define TRUE 1
-#define DELIM " "
-
-
+#define DELIM_PATH ":="
+#define DELIM_LINE " \t\n"
+#define EXIT "exit"
 
 #endif /* MAIN_H */

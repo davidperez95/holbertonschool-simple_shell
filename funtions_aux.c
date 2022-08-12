@@ -3,9 +3,23 @@
 extern char **environ;
 
 /**
+ *prompt - Printed character that prompts the user to enter a command.
  *
- *
- *
+ *Return: 0 if it receives a character
+ */
+int prompt(void)
+{
+	char *prompt = "$ ";
+
+	write(STDOUT_FILENO, prompt, _strlen(prompt));
+	return (0);
+}
+
+/**
+ *tokenizer - Functions that separates the command by delimiters
+ *@line: Command inserted by user
+ *@delim: Delimiter
+ *Return: The arguments that make up the commands
  */
 char **tokenizer(char *line, char *delim)
 {
@@ -46,10 +60,9 @@ char **tokenizer(char *line, char *delim)
 }
 
 /**
- *
- *
- *
- *
+ *find_path - Functions that finds the environment varibles in the path
+ *@environ: Environment varibles in the path
+ *Return: Environment variables
  */
 char **find_path(char **environ)
 {

@@ -1,19 +1,20 @@
 #include "main.h"
 
-extern char **environ; 
-
-int prompt(void)
-{
-	char *prompt = "$ ";
-	write(STDOUT_FILENO, prompt, _strlen(prompt));
-	return (0);
-}
+extern char **environ;
+/**
+ *main - Functions that receives the commands entered by the user.
+ *@line: User-entered command
+ *@argv: The different commands entered by the user.
+ *@envp: Enviironments variables.
+ *Return: Exit_succsess or exit failure.
+ */
 
 int main(void)
 {
-	char *line = NULL, **argv = NULL, **envp = NULL;
+	char *line = NULL;
+	char **argv = NULL, **envp = NULL;
 	size_t line_size = 0;
-	int status, characters_read = 0;
+	int status;/**characters_read = 0;*/
 	pid_t child_pid;
 
 	while (TRUE)
@@ -22,7 +23,8 @@ int main(void)
 			prompt();
 		if (!isatty(TRUE))
 			break;
-		characters_read = getline(&line, &line_size, stdin);
+		/**characters_read =*/
+		getline(&line, &line_size, stdin);
 		argv = tokenizer(line, DELIM_LINE);
 		if (argv[0] == NULL)
 			continue;
@@ -41,7 +43,7 @@ int main(void)
 		if (child_pid == 0)
 		{
 			if (execve(argv[0], argv, envp) == -1)
-			       perror("error");
+				perror("error");
 		}
 		else
 		{

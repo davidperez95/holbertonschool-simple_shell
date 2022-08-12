@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- *
- *
- *
+ *_strlen - Count the number of characters
+ *@string: String for to count
+ *Return: Number of characters
  */
 int _strlen(char *string)
 {
@@ -18,7 +18,6 @@ int _strlen(char *string)
  * _strcmp - compares two strings
  * @s1: string one
  * @s2: string two
- *
  * Return: 0 if equal or difference between s1 and s2
  */
 int _strcmp(char *s1, char *s2)
@@ -54,19 +53,20 @@ char *_strcpy(char *dest, char *src)
 }
 
 /**
- *
- *
- *
+ *_strncmp - Compare the numbers of bytes of two strings
+ *@s1: string one.
+ *@s2: string two.
+ *@n: Numbers of bytes.
+ *Return: 0 if is exit success or one number if is failed.
  */
 int _strncmp(char *s1, char *s2, size_t n)
 {
 	size_t i = 0;
 
 	for (; (s1[i] && s2[i]) && i < n; i++)
-        {
-                if (s1[i] != s2[i])
-                        return (s1[i] - s2[i]);
-        }
-
-        return (s1[i] - s2[i]);
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+	}
+	return (s1[i] - s2[i]);
 }

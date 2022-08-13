@@ -23,9 +23,15 @@ char **tokenizer(char *line, char *delim)
 {
 	char *token = NULL, *copy_line = NULL;
 	char **argv = NULL;
-	int count_token = 0, i = 0;
+	int count_token = 0, i = 0, j;
 
-	copy_line = malloc(sizeof(char) * (_strlen(line) + 1));
+	copy_line = malloc(sizeof(char) * (strlen(line)));
+	if (copy_line == NULL)
+	{
+		free(line);
+		return (NULL);
+	}
+
 	strcpy(copy_line, line);
 
 	token = strtok(line, delim);
@@ -38,14 +44,24 @@ char **tokenizer(char *line, char *delim)
 
 	argv = malloc(sizeof(char *) * count_token);
 	if (!argv)
+	{
+		free(line);
+		free(copy_line);
 		return (NULL);
+	}
 	token = strtok(copy_line, delim);
 	while (token != NULL)
 	{
-		argv[i] = malloc(sizeof(char) * (_strlen(token) + 1));
+		argv[i] = malloc(sizeof(char) * (strlen(token) + 1));
 		if (!argv[i])
 		{
-			free(argv[i]);
+			if (i >= 0)
+			{
+				for (j = 0; j <= i; j++)
+					free(argv[j]);
+			}
+			free(line);
+			free(copy_line);
 			free(argv);
 			return (NULL);
 		}
@@ -53,6 +69,8 @@ char **tokenizer(char *line, char *delim)
 		i++;
 		token = strtok(NULL, delim);
 	}
+	free(copy_line);
+	free(line);
 	argv[i] = NULL;
 	return (argv);
 }

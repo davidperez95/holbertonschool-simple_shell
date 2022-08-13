@@ -8,7 +8,12 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 #include <string.h>
+
+/* Global variable */ 
+
+extern char **environ;
 
 /* Prototypes */
 

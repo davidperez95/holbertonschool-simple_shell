@@ -1,7 +1,5 @@
 #include "main.h"
 
-extern char **environ;
-
 /**
  *prompt - Printed character that prompts the user to enter a command.
  *

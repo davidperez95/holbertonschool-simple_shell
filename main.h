@@ -11,9 +11,22 @@
 #include <sys/stat.h>
 #include <string.h>
 
-/* Global variable */ 
+/* Global variable */
 
 extern char **environ;
+
+/* Structure */
+
+/**
+ * struct built - builtin structure
+ * @command: Received command
+ * @function_built: Pointer to function
+ */
+typedef struct built
+{
+	char *command;
+	int (*function_built)(char *command);
+} built_t;
 
 /* Prototypes */
 
@@ -25,6 +38,8 @@ char *_strcpy(char *dest, char *src);
 int _strncmp(char *s1, char *s2, size_t n);
 int prompt(void);
 void all_free(char **argv, char **envp, char *line);
+int (*get_command(char *command));
+int env_func(void);
 
 /* Macros */
 

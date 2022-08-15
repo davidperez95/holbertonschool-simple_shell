@@ -13,6 +13,7 @@ int main(void)
 	int status, i = 0;
 	pid_t child_pid = 0;
 	struct stat st;
+	int (*function)(char *);
 
 	while (TRUE)
 	{
@@ -21,30 +22,31 @@ int main(void)
 
 		line_size = 0;
 		getline(&line, &line_size, stdin);
+		function = get_command(line);
+		if (function(line) == NULL)
+			continue;
+		function(line);
+		/**
 		if (strcmp(line, "exit\n") == 0)
 		{
 			free(line);
 			exit(0);
 		}
+		*/
 		argv = tokenizer(line, DELIM_LINE);
 		if (argv[0] == NULL)
 			continue;
-	
 		envp = find_path(environ);
-		
 		child_pid = fork();
-		
 		if (child_pid == -1)
 		{
 			all_free(argv, envp, line);
 			return (EXIT_FAILURE);
 		}
-
 		if (child_pid == 0)
 			execve(argv[0], argv, environ);
 		else
 			wait(&status);
-
 		all_free(argv, envp, line);
 	}
 	return (EXIT_SUCCESS);

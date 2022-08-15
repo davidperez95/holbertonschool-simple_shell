@@ -7,7 +7,7 @@
  */
 int prompt(void)
 {
-	char *prompt = "$ ";
+	char *prompt = "($) ";
 
 	write(STDOUT_FILENO, prompt, _strlen(prompt));
 	return (0);
@@ -23,14 +23,11 @@ char **tokenizer(char *line, char *delim)
 {
 	char *token = NULL, *copy_line = NULL;
 	char **argv = NULL;
-	int count_token = 0, i = 0, j;
+	int count_token = 0, i = 0;
 
-	copy_line = malloc(sizeof(char) * (strlen(line)));
+	copy_line = malloc((sizeof(char) * strlen(line)) + 1);
 	if (copy_line == NULL)
-	{
-		free(line);
 		return (NULL);
-	}
 
 	strcpy(copy_line, line);
 
@@ -42,10 +39,9 @@ char **tokenizer(char *line, char *delim)
 	}
 	count_token++;
 
-	argv = malloc(sizeof(char *) * count_token);
+	argv = malloc((sizeof(char *) * count_token) + 8);
 	if (!argv)
 	{
-		free(line);
 		free(copy_line);
 		return (NULL);
 	}
@@ -55,14 +51,7 @@ char **tokenizer(char *line, char *delim)
 		argv[i] = malloc(sizeof(char) * (strlen(token) + 1));
 		if (!argv[i])
 		{
-			if (i >= 0)
-			{
-				for (j = 0; j <= i; j++)
-					free(argv[j]);
-			}
-			free(line);
 			free(copy_line);
-			free(argv);
 			return (NULL);
 		}
 		strcpy(argv[i], token);
@@ -70,7 +59,6 @@ char **tokenizer(char *line, char *delim)
 		token = strtok(NULL, delim);
 	}
 	free(copy_line);
-	free(line);
 	argv[i] = NULL;
 	return (argv);
 }
@@ -91,13 +79,46 @@ char **find_path(char **environ)
 	{
 		if (strncmp(environ[i], str_path, 5) == 0)
 		{
-			my_path = environ[i];
+			my_path = malloc(sizeof(char) * strlen(environ[i]) + 1);
+			strcpy(my_path, environ[i]);
 			break;
 		}
 		i++;
 	}
 
 	envp = tokenizer(my_path, DELIM_PATH);
+	free(my_path);
 
 	return (envp);
+}
+
+/**
+ * all_free - frees all the pointers
+ * @argv: double pointer of commands
+ * @envp: double pointer of path
+ * @line: pointer to command
+ * Return: void
+ */
+void all_free(char **argv, char **envp, char *line)
+{
+	int i;
+
+	for (i = 0; argv[i] != NULL; i++)
+	{
+		free(argv[i]);
+		argv[i] = NULL;
+	}
+	free(argv);
+	argv = NULL;
+
+	for (i = 0; envp[i] != NULL; i++)
+	{
+		free(envp[i]);
+		envp[i] = NULL;
+	}
+	free(envp);
+	envp = NULL;
+
+	free(line);
+	line = NULL;
 }

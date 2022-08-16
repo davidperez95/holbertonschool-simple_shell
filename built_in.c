@@ -5,7 +5,7 @@
  * @command: Command received
  * Return: Pointer to the funtions
  */
-void (*get_command(const char *command))
+void (*get_command(const char *command))(void)
 {
 	int i = 0;
 
@@ -25,7 +25,7 @@ void (*get_command(const char *command))
 
 /**
  * env_func - Print all the enviroment
- *
+ * Return: void
  */
 void env_func(void)
 {
@@ -40,7 +40,7 @@ void env_func(void)
 
 /**
  * exit_func - exit to the shell
- *
+ * Return: void
  */
 void exit_func(void)
 {

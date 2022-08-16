@@ -10,9 +10,8 @@ int main(void)
 	char *line = NULL;
 	char **argv = NULL, **envp = NULL;
 	size_t line_size = 0;
-	int status, i = 0;
+	int status;
 	pid_t child_pid = 0;
-	struct stat st;
 	void (*function)(void);
 
 	while (TRUE)

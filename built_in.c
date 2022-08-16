@@ -5,28 +5,29 @@
  * @command: Command received
  * Return: Pointer to the funtions
  */
-int (*get_comman(char *command))
+void (*get_command(const char *command))
 {
 	int i = 0;
 
 	built_t functions[] = {
-	{"env", env_func},
+	{"env\n", env_func},
+	{"exit\n", exit_func},
 	{NULL, NULL}
 	};
 
 	for (; functions[i].command != NULL; i++)
 	{
-	if (*(functions[i].command) == *command)
-		break;
+		if (strcmp(functions[i].command, command) == 0)
+			break;
 	}
 	return (functions[i].function_built);
 }
 
 /**
  * env_func - Print all the enviroment
- * Return: 0
+ *
  */
-int env_func(char *)
+void env_func(void)
 {
 	int i = 0;
 
@@ -35,5 +36,13 @@ int env_func(char *)
 	printf("%s\n", environ[i]);
 		i++;
 	}
-	return (0);
+}
+
+/**
+ * exit_func - exit to the shell
+ *
+ */
+void exit_func(void)
+{
+	exit(0);
 }

@@ -70,3 +70,20 @@ int _strncmp(char *s1, char *s2, size_t n)
 	}
 	return (s1[i] - s2[i]);
 }
+
+/**
+ * *_strcat - concatenar
+ *@dest: destin
+ *@src: inicio
+ *Return: dest
+ */
+char *_strcat(char *dest, char *src)
+{
+	int i, j;
+
+	for (i = 0 ; dest[i] != '\0' ; i++)
+	;
+	for (j = 0 ; (dest[i + j] = *src++) != '\0' ; j++)
+	;
+	return (dest);
+}

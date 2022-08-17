@@ -55,7 +55,7 @@ int main(void)
 			all_free(argv, envp, line);
 			return (EXIT_FAILURE);
 		}
-
+		_check_argv(argv[0]);
 		if (child_pid == 0)
 			execve(argv[0], argv, environ);
 		else

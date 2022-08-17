@@ -32,7 +32,7 @@ void env_func(void)
 
 	while (environ[i] != NULL)
 	{
-	printf("%s\n", environ[i]);
+	_printf("%s\n", environ[i]);
 		i++;
 	}
 }

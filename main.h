@@ -10,6 +10,8 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <string.h>
+#include <stdarg.h>
+#include <limits.h>
 
 /* Global variable */
 
@@ -28,6 +30,18 @@ typedef struct built
 	void (*function_built)(void);
 } built_t;
 
+/**
+ * struct functions - _printf structure
+ *@op: Received options
+ *@f: Pointer fuction
+ */
+typedef struct functions
+{
+	char *op;
+	void (*f)(char *, va_list, int *);
+
+} functions;
+
 /* Prototypes */
 
 char **tokenizer(char *line, char *delim);
@@ -41,6 +55,11 @@ void all_free(char **argv, char **envp, char *line);
 void *_calloc(unsigned int nmemb, unsigned int size);
 void (*get_command(const char *command))(void);
 void env_func(void);
+int _printf(const char *format, ...);
+void (*get_op_functions(char c))(char *, va_list, int *);
+void op_string(char *buffer, va_list ap, int *bf_count);
+char *_check_argv(char *argv);
+char *_strcat(char *dest, char *src);
 
 /* Macros */
 

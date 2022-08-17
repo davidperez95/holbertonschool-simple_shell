@@ -38,6 +38,7 @@ char *_strcpy(char *dest, char *src);
 int _strncmp(char *s1, char *s2, size_t n);
 int prompt(void);
 void all_free(char **argv, char **envp, char *line);
+void *_calloc(unsigned int nmemb, unsigned int size);
 void (*get_command(const char *command))(void);
 void env_func(void);
 

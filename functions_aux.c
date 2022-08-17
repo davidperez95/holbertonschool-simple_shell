@@ -54,7 +54,8 @@ char **tokenizer(char *line, char *delim)
 	}
 	if (!argv[0])
 	{
-		all_free(argv, NULL, copy_line);
+		free(copy_line);
+		free(argv);
 		return (NULL);
 	}
 	free(copy_line), argv[i] = NULL;

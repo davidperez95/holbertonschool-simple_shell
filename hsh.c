@@ -22,7 +22,10 @@ int main(void)
 		line_size = 0;
 		command = getline(&line, &line_size, stdin);
 		if (command == EOF)
+		{
+			free(line);
 			break;
+		}
 		function = get_command(line);
 		if (function != NULL)
 		{

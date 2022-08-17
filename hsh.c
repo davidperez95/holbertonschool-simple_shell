@@ -7,8 +7,7 @@
 
 int main(void)
 {
-	char *line = NULL;
-	char **argv = NULL, **envp = NULL;
+	char *line = NULL, **argv = NULL, **envp = NULL;
 	size_t line_size = 0;
 	ssize_t command;
 	int status;
@@ -19,8 +18,7 @@ int main(void)
 	{
 		if (isatty(STDIN_FILENO) == 1)
 			prompt();
-		line_size = 0;
-		command = getline(&line, &line_size, stdin);
+		line_size = 0, command = getline(&line, &line_size, stdin);
 		if (command == EOF)
 		{
 			free(line);
@@ -29,13 +27,15 @@ int main(void)
 		function = get_command(line);
 		if (function != NULL)
 		{
-			free(line);
-			function();
+			free(line), function();
 			continue;
 		}
 		argv = tokenizer(line, DELIM_LINE);
-		if (argv[0] == NULL)
+		if (argv == NULL)
+		{
+			free(line);
 			continue;
+		}
 		envp = find_path(environ);
 		child_pid = fork();
 		if (child_pid == -1)
@@ -49,5 +49,5 @@ int main(void)
 			wait(&status);
 		all_free(argv, envp, line);
 	}
-	return (EXIT_SUCCESS);
+	return (WEXITSTATUS(status));
 }

@@ -39,7 +39,7 @@ char **tokenizer(char *line, char *delim)
 	}
 	count_token++;
 
-	argv = malloc((sizeof(char *) * count_token) + 8);
+	argv = calloc(count_token + 8, sizeof(char *));
 	if (!argv)
 	{
 		free(copy_line);
@@ -57,6 +57,12 @@ char **tokenizer(char *line, char *delim)
 		strcpy(argv[i], token);
 		i++;
 		token = strtok(NULL, delim);
+	}
+	if (!argv[0])
+	{
+		free(copy_line);
+		free(argv);
+		return (NULL);
 	}
 	free(copy_line);
 	argv[i] = NULL;

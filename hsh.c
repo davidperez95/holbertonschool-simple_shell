@@ -10,7 +10,7 @@ int main(void)
 	char *line = NULL, **argv = NULL, **envp = NULL;
 	size_t line_size = 0;
 	ssize_t command;
-	int status;
+	/* int status; */
 	pid_t child_pid = 0;
 	void (*function)(void);
 
@@ -46,8 +46,8 @@ int main(void)
 		if (child_pid == 0)
 			execve(argv[0], argv, environ);
 		else
-			wait(&status);
+			wait(STATUS);
 		all_free(argv, envp, line);
 	}
-	return (WEXITSTATUS(status));
+	return (WEXITSTATUS(STATUS));
 }

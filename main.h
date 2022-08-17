@@ -48,5 +48,6 @@ void exit_func(void);
 #define DELIM_PATH ":="
 #define DELIM_LINE " \t\n"
 #define EXIT "exit"
+#define STATUS 0
 
 #endif /* MAIN_H */

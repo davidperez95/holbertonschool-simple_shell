@@ -44,5 +44,5 @@ void env_func(void)
  */
 void exit_func(void)
 {
-	exit(0);
+	exit(STATUS);
 }

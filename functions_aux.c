@@ -10,7 +10,7 @@ int prompt(void)
 	char *prompt = "($) ";
 
 	write(STDOUT_FILENO, prompt, _strlen(prompt));
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 /**
@@ -30,13 +30,9 @@ char **tokenizer(char *line, char *delim)
 		return (NULL);
 
 	strcpy(copy_line, line);
-
 	token = strtok(line, delim);
 	while (token != NULL)
-	{
-		token = strtok(NULL, delim);
-		count_token++;
-	}
+		token = strtok(NULL, delim), count_token++;
 	count_token++;
 
 	argv = calloc(count_token + 8, sizeof(char *));
@@ -54,18 +50,14 @@ char **tokenizer(char *line, char *delim)
 			free(copy_line);
 			return (NULL);
 		}
-		strcpy(argv[i], token);
-		i++;
-		token = strtok(NULL, delim);
+		strcpy(argv[i], token), i++, token = strtok(NULL, delim);
 	}
 	if (!argv[0])
 	{
-		free(copy_line);
-		free(argv);
+		all_free(argv, NULL, copy_line);
 		return (NULL);
 	}
-	free(copy_line);
-	argv[i] = NULL;
+	free(copy_line), argv[i] = NULL;
 	return (argv);
 }
 

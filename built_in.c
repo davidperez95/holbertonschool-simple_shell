@@ -11,7 +11,6 @@ void (*get_command(const char *command))(void)
 
 	built_t functions[] = {
 	{"env\n", env_func},
-	{"exit\n", exit_func},
 	{NULL, NULL}
 	};
 
@@ -36,13 +35,4 @@ void env_func(void)
 	printf("%s\n", environ[i]);
 		i++;
 	}
-}
-
-/**
- * exit_func - exit to the shell
- * Return: void
- */
-void exit_func(void)
-{
-	exit(STATUS);
 }

@@ -40,7 +40,6 @@ int prompt(void);
 void all_free(char **argv, char **envp, char *line);
 void (*get_command(const char *command))(void);
 void env_func(void);
-void exit_func(void);
 
 /* Macros */
 
@@ -48,6 +47,5 @@ void exit_func(void);
 #define DELIM_PATH ":="
 #define DELIM_LINE " \t\n"
 #define EXIT "exit"
-#define STATUS 0
 
 #endif /* MAIN_H */

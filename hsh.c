@@ -10,6 +10,7 @@ int main(void)
 	char *line = NULL;
 	char **argv = NULL, **envp = NULL;
 	size_t line_size = 0;
+	ssize_t command;
 	int status;
 	pid_t child_pid = 0;
 	void (*function)(void);
@@ -18,9 +19,10 @@ int main(void)
 	{
 		if (isatty(STDIN_FILENO) == 1)
 			prompt();
-
 		line_size = 0;
-		getline(&line, &line_size, stdin);
+		command = getline(&line, &line_size, stdin);
+		if (command == EOF)
+			break;
 		function = get_command(line);
 		if (function != NULL)
 		{

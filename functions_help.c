@@ -36,7 +36,7 @@ char *_check_argv(char *command, char **envp)
 		}
 		free(concat);
 	}
-	perror(command);
+	_printf("./hsh: 1: %s: not found\n", command);
 	free(command);
 	return (NULL);
 }
@@ -60,4 +60,24 @@ int execute_child(char **argv, int status)
 		wait(&status);
 
 	return (status);
+}
+
+/**
+ * read_line - reads the input line
+ * @line: buffer to store line
+ * @line_size: number of bytes of line
+ * Return: pointer to buffer line
+ */
+char *read_line(char *line, size_t line_size)
+{
+	ssize_t command = 0;
+
+	command = getline(&line, &line_size, stdin);
+	if (command == EOF)
+	{
+		free(line);
+		exit(2);
+	}
+
+	return (line);
 }

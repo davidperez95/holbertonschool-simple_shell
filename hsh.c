@@ -9,7 +9,6 @@ int main(void)
 {
 	char *line = NULL, **argv = NULL, **envp = NULL;
 	size_t line_size = 0;
-	ssize_t command = 0;
 	int status = 0;
 	void (*function)(void) = NULL;
 
@@ -17,13 +16,8 @@ int main(void)
 	{
 		if (isatty(STDIN_FILENO) == 1)
 			prompt();
-		line_size = 0, 
-		command = getline(&line, &line_size, stdin);
-		if (command == EOF)
-		{
-			free(line);
-			break;
-		}
+		line_size = 0;
+		line = read_line(line, line_size);
 		if (_strcmp(line, "exit\n") == 0)
 		{
 			free(line);
@@ -32,8 +26,7 @@ int main(void)
 		function = get_command(line);
 		if (function != NULL)
 		{
-			free(line);
-			function();
+			free(line), function();
 			continue;
 		}
 		argv = tokenizer(line, DELIM_LINE);

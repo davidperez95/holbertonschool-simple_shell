@@ -39,28 +39,34 @@ typedef struct functions
 {
 	char *op;
 	void (*f)(char *, va_list, int *);
-
 } functions;
 
 /* Prototypes */
 
 char **tokenizer(char *line, char *delim);
 char **find_path(char **environ);
+char *_check_argv(char *command, char **envp);
+char *read_line(char *line, size_t line_size);
+int execute_child(char **argv, int status);
+
+/* string prototypes */
 int _strlen(char *string);
+int _strncmp(char *s1, char *s2, size_t n);
 int _strcmp(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
-int _strncmp(char *s1, char *s2, size_t n);
+char *_strcat(char *dest, char *src);
+
+/* aux functions prototypes */
 int prompt(void);
+int _printf(const char *format, ...);
 void all_free(char **argv, char **envp, char *line);
 void *_calloc(unsigned int nmemb, unsigned int size);
-void (*get_command(char *command))(void);
-void env_func(void);
-int _printf(const char *format, ...);
 void (*get_op_functions(char c))(char *, va_list, int *);
 void op_string(char *buffer, va_list ap, int *bf_count);
-char *_check_argv(char *command, char **envp);
-char *_strcat(char *dest, char *src);
-int execute_child(char **argv, int status);
+
+/* built in functions prototypes */
+void (*get_command(char *command))(void);
+void env_func(void);
 
 /* Macros */
 

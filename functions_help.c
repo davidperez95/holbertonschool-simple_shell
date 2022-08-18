@@ -76,7 +76,7 @@ char *read_line(char *line, size_t line_size)
 	if (command == EOF)
 	{
 		free(line);
-		exit(2);
+		return (EXIT_SUCCESS);
 	}
 
 	return (line);

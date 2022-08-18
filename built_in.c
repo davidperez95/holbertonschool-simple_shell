@@ -5,7 +5,7 @@
  * @command: Command received
  * Return: Pointer to the funtions
  */
-void (*get_command(const char *command))(void)
+void (*get_command(char *command))(void)
 {
 	int i = 0;
 
@@ -16,7 +16,7 @@ void (*get_command(const char *command))(void)
 
 	for (; functions[i].command != NULL; i++)
 	{
-		if (strcmp(functions[i].command, command) == 0)
+		if (_strcmp(functions[i].command, command) == 0)
 			break;
 	}
 	return (functions[i].function_built);
@@ -32,7 +32,7 @@ void env_func(void)
 
 	while (environ[i] != NULL)
 	{
-	_printf("%s\n", environ[i]);
+		_printf("%s\n", environ[i]);
 		i++;
 	}
 }

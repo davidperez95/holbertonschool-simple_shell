@@ -25,11 +25,11 @@ char **tokenizer(char *line, char *delim)
 	char **argv = NULL;
 	int count_token = 0, i = 0;
 
-	copy_line = malloc((sizeof(char) * strlen(line)) + 1);
+	copy_line = malloc((sizeof(char) * _strlen(line)) + 1);
 	if (copy_line == NULL)
 		return (NULL);
 
-	strcpy(copy_line, line);
+	_strcpy(copy_line, line);
 	token = strtok(line, delim);
 	while (token != NULL)
 		token = strtok(NULL, delim), count_token++;
@@ -44,13 +44,13 @@ char **tokenizer(char *line, char *delim)
 	token = strtok(copy_line, delim);
 	while (token != NULL)
 	{
-		argv[i] = malloc(sizeof(char) * (strlen(token) + 1));
+		argv[i] = malloc(sizeof(char) * (_strlen(token) + 1));
 		if (!argv[i])
 		{
 			free(copy_line);
 			return (NULL);
 		}
-		strcpy(argv[i], token), i++, token = strtok(NULL, delim);
+		_strcpy(argv[i], token), i++, token = strtok(NULL, delim);
 	}
 	if (!argv[0])
 	{
@@ -76,10 +76,10 @@ char **find_path(char **environ)
 
 	while (environ[i] != NULL)
 	{
-		if (strncmp(environ[i], str_path, 5) == 0)
+		if (_strncmp(environ[i], str_path, 4) == 0)
 		{
-			my_path = malloc(sizeof(char) * strlen(environ[i]) + 1);
-			strcpy(my_path, environ[i]);
+			my_path = malloc(sizeof(char) * _strlen(environ[i]) + 1);
+			_strcpy(my_path, environ[i]);
 			break;
 		}
 		i++;

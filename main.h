@@ -26,7 +26,7 @@ extern char **environ;
  */
 typedef struct built
 {
-	const char *command;
+	char *command;
 	void (*function_built)(void);
 } built_t;
 
@@ -53,13 +53,14 @@ int _strncmp(char *s1, char *s2, size_t n);
 int prompt(void);
 void all_free(char **argv, char **envp, char *line);
 void *_calloc(unsigned int nmemb, unsigned int size);
-void (*get_command(const char *command))(void);
+void (*get_command(char *command))(void);
 void env_func(void);
 int _printf(const char *format, ...);
 void (*get_op_functions(char c))(char *, va_list, int *);
 void op_string(char *buffer, va_list ap, int *bf_count);
 char *_check_argv(char *command, char **envp);
 char *_strcat(char *dest, char *src);
+int execute_child(char **argv, int status);
 
 /* Macros */
 

@@ -11,7 +11,6 @@ int main(void)
 	size_t line_size = 0;
 	ssize_t command = 0;
 	int status = 0;
-	pid_t child_pid = 0;
 	void (*function)(void) = NULL;
 
 	while (TRUE)
@@ -25,7 +24,7 @@ int main(void)
 			free(line);
 			break;
 		}
-		if (strcmp(line, "exit\n") == 0)
+		if (_strcmp(line, "exit\n") == 0)
 		{
 			free(line);
 			return (WEXITSTATUS(status));
@@ -51,16 +50,7 @@ int main(void)
 			status = 32512;
 			continue;
 		}
-		child_pid = fork();
-		if (child_pid == -1)
-		{
-			all_free(argv, envp, line);
-			return (EXIT_FAILURE);
-		}
-		if (child_pid == 0)
-			execve(argv[0], argv, environ);
-		else
-			wait(&status);
+		status = execute_child(argv, status);
 		all_free(argv, envp, line);
 	}
 	return (WEXITSTATUS(status));

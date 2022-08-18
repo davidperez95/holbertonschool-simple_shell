@@ -73,9 +73,9 @@ int _strncmp(char *s1, char *s2, size_t n)
 
 /**
  * *_strcat - concatenar
- *@dest: destin
- *@src: inicio
- *Return: dest
+ *@dest: dest string
+ *@src: source string
+ *Return: dest string
  */
 char *_strcat(char *dest, char *src)
 {

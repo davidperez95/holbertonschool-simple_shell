@@ -40,3 +40,24 @@ char *_check_argv(char *command, char **envp)
 	free(command);
 	return (NULL);
 }
+
+/**
+ * execute_child - creates a child and executes it
+ * @argv: list of arguments to execute
+ * @status: status of father
+ * Return: status.
+ */
+int execute_child(char **argv, int status)
+{
+	pid_t child_pid = 0;
+
+	child_pid = fork();
+	if (child_pid == -1)
+		return (WEXITSTATUS(status));
+	if (child_pid == 0)
+		execve(argv[0], argv, environ);
+	else
+		wait(&status);
+
+	return (status);
+}

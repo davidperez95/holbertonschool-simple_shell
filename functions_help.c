@@ -7,13 +7,26 @@
  */
 char *_check_argv(char *argv)
 {
-	int i;
-	char *complement = "/bin/";
-  
-	while (argv[i] != '\0')
-		i++;
+	char *concat = NULL;
+	char *str = "/bin/";
+	int i = 0, j = 0;
+
+	
 	if (argv[0] != '/')
-		_strcat(complement, argv);
-	argv = complement;
+	{
+		concat = malloc(sizeof(char) * (_strlen(str) + _strlen(argv) + 1));
+		for (i = 0; str[i] != '\0'; i++)
+			concat[i] = str[i];
+
+		for (j = 0; argv[j] != '\0'; i++, j++)
+			concat[i] = argv[j];
+
+		concat[i] = '\0';
+
+		argv = concat;
+		free(concat);
+		return (argv);
+	}
+
 	return (argv);
 }

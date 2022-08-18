@@ -25,13 +25,11 @@ int main(void)
 			free(line);
 			break;
 		}
-
 		if (strcmp(line, "exit\n") == 0)
 		{
 			free(line);
 			return (WEXITSTATUS(status));
 		}
-
 		function = get_command(line);
 		if (function != NULL)
 		{
@@ -39,23 +37,26 @@ int main(void)
 			function();
 			continue;
 		}
-
 		argv = tokenizer(line, DELIM_LINE);
 		if (argv == NULL)
 		{
 			free(line);
 			continue;
 		}
-
 		envp = find_path(environ);
+		argv[0] = _check_argv(argv[0], envp);
+		if (!argv[0])
+		{
+			all_free(argv, envp, line);
+			status = 32512;
+			continue;
+		}
 		child_pid = fork();
-
 		if (child_pid == -1)
 		{
 			all_free(argv, envp, line);
 			return (EXIT_FAILURE);
 		}
-		_check_argv(argv[0]);
 		if (child_pid == 0)
 			execve(argv[0], argv, environ);
 		else

@@ -1,32 +1,42 @@
 #include "main.h"
 
 /**
- *
- *
- *
+ * _check_argv - check of argv
+ * @command: Command recived
+ * @envp: PATH
+ * Return: concat, NULL
  */
-char *_check_argv(char *argv)
+char *_check_argv(char *command, char **envp)
 {
 	char *concat = NULL;
-	char *str = "/bin/";
-	int i = 0, j = 0;
+	struct stat st;
+	int i = 0, len_command = 0, len_envp = 0;
 
-	
-	if (argv[0] != '/')
+	if (stat(command, &st) == 0)
+		return (command);
+
+	for (i = 1; envp && envp[i]; i++)
 	{
-		concat = malloc(sizeof(char) * (_strlen(str) + _strlen(argv) + 1));
-		for (i = 0; str[i] != '\0'; i++)
-			concat[i] = str[i];
+		len_command = _strlen(command);
+		len_envp = _strlen(envp[i]);
 
-		for (j = 0; argv[j] != '\0'; i++, j++)
-			concat[i] = argv[j];
+		concat = malloc(sizeof(char) * (len_command + len_envp) + 2);
 
-		concat[i] = '\0';
+		if (concat == NULL)
+			return (NULL);
 
-		argv = concat;
+		_strcpy(concat, envp[i]);
+		_strcat(concat, "/");
+		_strcat(concat, command);
+
+		if (stat(concat, &st) == 0)
+		{
+			free(command);
+			return (concat);
+		}
 		free(concat);
-		return (argv);
 	}
-
-	return (argv);
+	perror(command);
+	free(command);
+	return (NULL);
 }

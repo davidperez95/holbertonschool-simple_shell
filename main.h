@@ -58,7 +58,8 @@ void env_func(void);
 int _printf(const char *format, ...);
 void (*get_op_functions(char c))(char *, va_list, int *);
 void op_string(char *buffer, va_list ap, int *bf_count);
-char *_check_argv(char *argv);
+char *_check_argv(char *command, char **envp);
+char *_strcat(char *dest, char *src);
 
 /* Macros */
 

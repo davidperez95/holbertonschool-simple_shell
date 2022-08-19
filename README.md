@@ -22,8 +22,9 @@ The next steps are a brief description about how the shell works:
 
 ## Requirements:
 
-Operating System: [Ubuntu 20.04](https://releases.ubuntu.com/20.04/)
-Compiler: [GCC](https://gcc.gnu.org/)
+- Operating System: [Ubuntu 20.04](https://releases.ubuntu.com/20.04/)
+
+- Compiler: [GCC](https://gcc.gnu.org/)
 
 ## General Project
 
@@ -85,5 +86,5 @@ Here are shown some examples of the usage of the Shell:
 
 ## Authors:
 
-- David Andres Perez Cruz - [davidperez95](https://github.com/davidperez95)
-- Manuel Esteban Rodriguez Castro - [ManuRodriguezC](https://github.com/ManuRodriguezC)
+- David Andres Perez Cruz - [@davidperez95](https://github.com/davidperez95)
+- Manuel Esteban Rodriguez Castro - [@ManuRodriguezC](https://github.com/ManuRodriguezC)

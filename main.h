@@ -67,6 +67,7 @@ void op_string(char *buffer, va_list ap, int *bf_count);
 /* built in functions prototypes */
 void (*get_command(char *command))(void);
 void env_func(void);
+void help_func(void);
 
 /* Macros */
 

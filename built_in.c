@@ -11,6 +11,7 @@ void (*get_command(char *command))(void)
 
 	built_t functions[] = {
 	{"env\n", env_func},
+	{"help\n", help_func},
 	{NULL, NULL}
 	};
 
@@ -35,4 +36,16 @@ void env_func(void)
 		_printf("%s\n", environ[i]);
 		i++;
 	}
+}
+
+/**
+ * help_func - Print some options to execute
+ * Return: void
+ */
+void help_func(void)
+{
+	_printf("env:  Enviroment Variables\n");
+	_printf("ls:   Files and directories\n");
+	_printf("pwd:  Working directory\n");
+	_printf("exit: Exit shell\n");
 }

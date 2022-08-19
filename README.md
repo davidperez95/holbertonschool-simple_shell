@@ -8,7 +8,7 @@ The predominantly used calls are read, write, open, execve, exit, fork, free, ma
 
 ## Flowchart
 
-![Shell Flowchart](/root/holbertonschool-simple_shell/shell_flowchart.jpg "Shell Flowchart")
+![Shell Flowchart](/shell_flowchart.jpg "Shell Flowchart")
 ## Process Description
 
 The next steps are a brief description about how the shell works:

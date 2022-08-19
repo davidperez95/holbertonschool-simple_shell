@@ -16,6 +16,7 @@ int main(void)
 	{
 		if (isatty(STDIN_FILENO) == 1)
 			prompt();
+		signal(SIGINT, handle);
 		line_size = 0;
 		line = read_line(line, line_size, status);
 		if (_strcmp(line, "exit\n") == 0)
@@ -39,8 +40,7 @@ int main(void)
 		argv[0] = _check_argv(argv[0], envp);
 		if (!argv[0])
 		{
-			all_free(argv, envp, line);
-			status = FILE_NOT_FOUND;
+			all_free(argv, envp, line), status = FILE_NOT_FOUND;
 			continue;
 		}
 		status = execute_child(argv, status);

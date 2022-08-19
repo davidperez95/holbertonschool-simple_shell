@@ -49,6 +49,7 @@ char *_check_argv(char *command, char **envp);
 char *read_line(char *line, size_t line_size, int status);
 int execute_child(char **argv, int status);
 void print_error(char *command);
+void handle(int num);
 
 /* string prototypes */
 int _strlen(char *string);

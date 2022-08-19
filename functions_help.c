@@ -108,3 +108,14 @@ void print_error(char *command)
 	write(2, concat, size_concat);
 	free(concat);
 }
+
+/**
+ * handle - handles signal
+ * @num: unused parameter
+ * Return: void
+ */
+void handle(int num)
+{
+	(void)num;
+	write(STDOUT_FILENO, "\n($) ", 5);
+}

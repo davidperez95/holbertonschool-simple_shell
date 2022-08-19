@@ -93,7 +93,7 @@ void print_error(char *command)
 	int size_concat = 0, all_size = 0;
 	char *concat = NULL;
 	char *str1 = "./hsh: 1: ";
-	char *str2 = " not found\n";
+	char *str2 = ": not found\n";
 
 	all_size = _strlen(str1) + _strlen(str2) + _strlen(command) + 1;
 	concat = malloc(sizeof(char) * all_size);

@@ -36,7 +36,7 @@ char *_check_argv(char *command, char **envp)
 		}
 		free(concat);
 	}
-	_printf("./hsh: 1: %s: not found\n", command);
+	print_error(command);
 	free(command);
 	return (NULL);
 }
@@ -66,9 +66,10 @@ int execute_child(char **argv, int status)
  * read_line - reads the input line
  * @line: buffer to store line
  * @line_size: number of bytes of line
+ * @status: status of father
  * Return: pointer to buffer line
  */
-char *read_line(char *line, size_t line_size)
+char *read_line(char *line, size_t line_size, int status)
 {
 	ssize_t command = 0;
 
@@ -76,8 +77,34 @@ char *read_line(char *line, size_t line_size)
 	if (command == EOF)
 	{
 		free(line);
-		exit(0);
+		exit(WEXITSTATUS(status));
 	}
 
 	return (line);
+}
+
+/**
+ * print_error - Print erro if not found file
+ * @command: Receved command
+ * Return: void
+ */
+void print_error(char *command)
+{
+	int size_concat = 0, all_size = 0;
+	char *concat = NULL;
+	char *str1 = "./hsh: 1: ";
+	char *str2 = " not found\n";
+
+	all_size = _strlen(str1) + _strlen(str2) + _strlen(command) + 1;
+	concat = malloc(sizeof(char) * all_size);
+	if (concat == NULL)
+		exit(2);
+
+	_strcpy(concat, str1);
+	_strcat(concat, command);
+	_strcat(concat, str2);
+	size_concat = _strlen(concat);
+
+	write(2, concat, size_concat);
+	free(concat);
 }

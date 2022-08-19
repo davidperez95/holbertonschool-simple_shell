@@ -17,7 +17,7 @@ int main(void)
 		if (isatty(STDIN_FILENO) == 1)
 			prompt();
 		line_size = 0;
-		line = read_line(line, line_size);
+		line = read_line(line, line_size, status);
 		if (_strcmp(line, "exit\n") == 0)
 		{
 			free(line);
@@ -40,7 +40,7 @@ int main(void)
 		if (!argv[0])
 		{
 			all_free(argv, envp, line);
-			status = 32512;
+			status = FILE_NOT_FOUND;
 			continue;
 		}
 		status = execute_child(argv, status);

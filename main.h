@@ -46,8 +46,9 @@ typedef struct functions
 char **tokenizer(char *line, char *delim);
 char **find_path(char **environ);
 char *_check_argv(char *command, char **envp);
-char *read_line(char *line, size_t line_size);
+char *read_line(char *line, size_t line_size, int status);
 int execute_child(char **argv, int status);
+void print_error(char *command);
 
 /* string prototypes */
 int _strlen(char *string);
@@ -75,5 +76,6 @@ void help_func(void);
 #define DELIM_PATH ":="
 #define DELIM_LINE " \t\n"
 #define EXIT "exit"
+#define FILE_NOT_FOUND 32512
 
 #endif /* MAIN_H */

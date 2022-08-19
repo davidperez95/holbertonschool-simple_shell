@@ -1,0 +1,49 @@
+.TH hsh 1 "18/08/2022" "hsh(1)" "hsh - General Commands Manual"
+
+.SH NAME
+.B Simple_Shell - hsh - emulate to the basics sh shell.
+- a custom command language interpreter
+
+.SH SYNOPSIS
+.B ./hsh
+
+.SH DECRIPTION
+The hsh simple shell is a command languages interpreter taht executes commands read from a command line string, the standar input, or a specified file, this shell tries to be a mini copy of the unix shell created by Ken Thompson.
+
+.SH OVERVIEW
+Read, interpret and execute the commands sent to the terminal.
+
+.SH INVOCATION
+Compile simple_shell with the GNU Commpiler Collection, using gcc plus the below specified flags:
+.B $ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+
+Interactive Mode
+.B ($) ./hsh
+Non Interactive Mode
+.B echo "ls" | ./hsh
+
+.B USAGE
+command -flags
+.B Example
+"ls -al"
+
+.SH BUILTINS
+The following builtin commands are supported:
+.B exit - exit to shell
+.B env - prints the environment variables
+
+EXAMPLE USAGE
+
+($) ls
+README.md   built_in.c   functions_str.c   main.h   'Shell flowchart.jpg'   functions_aux.c   hsh.c   _printf.c   functions_help.c
+
+echo "pwd" | ./hsh
+/home/manurodriguez/holberton/holbertonschool-simple_shell
+
+.SH AUTHORS
+
+David Andrés Pérez Cruz <4668@holbertonstudents.com>
+
+Manuel Esteban  Rodríguez Castro <5176@holbertonstudents.com>
+
+See AUTHORS file for more detail.
